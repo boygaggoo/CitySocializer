@@ -30,10 +30,10 @@ static int followedAccounts; /** This is used to count number of accounts follow
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     accounts = [[NSArray alloc]init];
     accountStore = [[ACAccountStore alloc] init];
-
+    
     newPoriflesArray = [[NSArray alloc]init];
     
     NSString *ver = [[UIDevice currentDevice] systemVersion];
@@ -45,14 +45,30 @@ static int followedAccounts; /** This is used to count number of accounts follow
     
     accountIndex = [[[NSUserDefaults standardUserDefaults]stringForKey:@"accountIndex"]intValue];
     
-    // check if we need to update our credentionals
-    if([[NSUserDefaults standardUserDefaults]boolForKey:@"shouldUpdate"]) // yes we have to make reverse OAuth and saves the credentionals to the server database for further usages
-    {
-        [self reverseOAuth];
-    }else // No, we already registered so we just ask the server to load us new account so we can follow them up
-    {
-        [self loadNewProfiles];
-    }
+    
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        if(granted){
+            // Get the list of Twitter accounts.
+            accounts = [accountStore accountsWithAccountType:accountType];
+            
+            
+            // check if we need to update our credentionals
+            if([[NSUserDefaults standardUserDefaults]boolForKey:@"shouldUpdate"]) // yes we have to make reverse OAuth and saves the credentionals to the server database for further usages
+            {
+                [self reverseOAuth];
+            }else // No, we already registered so we just ask the server to load us new account so we can follow them up
+            {
+                [self performSelectorOnMainThread:@selector(showWaitingView) withObject:nil waitUntilDone:YES];
+                [self loadNewProfiles];
+            }
+            
+        }else {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Please note, that the application requires twitter interaction and requires as well your permission." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 #pragma mark reverse OAuth Logic
@@ -62,52 +78,35 @@ static int followedAccounts; /** This is used to count number of accounts follow
 -(void)reverseOAuth
 {
     [self.followThemButton setEnabled:NO];
-    [[self.navigationController view] addSubview:_mainWaitView];
-    _mainWaitView.frame = CGRectMake(0, 0, _mainWaitView.frame.size.width, _mainWaitView.frame.size.height);
-    
+    [self performSelectorOnMainThread:@selector(showWaitingView) withObject:nil waitUntilDone:YES];
     [self.waitLabel setText:@"Registering Your Account.."];
     [self.waitLabel setNeedsDisplay];
     apiManager = [[TWAPIManager alloc] init];
-    
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-
-    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
-            if(granted){
-                // Get the list of Twitter accounts.
-                accounts = [accountStore accountsWithAccountType:accountType];
-               
-                
-                // Asks twitter api to make a reverse OAuth by first making verify credentionals call then getting the replied parts and split it accordingly
-                [apiManager
-                 performReverseAuthForAccount:[accounts objectAtIndex:accountIndex]
-                 withHandler:^(NSData *responseData, NSError *error) {
-                     if (responseData) {
-                         NSString *responseStr = [[NSString alloc]
-                                                  initWithData:responseData
-                                                  encoding:NSUTF8StringEncoding];
-                         
-                         NSArray *parts = [responseStr
-                                           componentsSeparatedByString:@"&"];
-                         
-                         // Get oauth_token
-                         NSString *oauth_tokenKV = [parts objectAtIndex:0];
-                         NSArray *oauth_tokenArray = [oauth_tokenKV componentsSeparatedByString:@"="];
-                         oauthToken = [oauth_tokenArray objectAtIndex:1];
-                         
-                         // Get oauth_token_secret
-                         NSString *oauth_token_secretKV = [parts objectAtIndex:1];
-                         NSArray *oauth_token_secretArray = [oauth_token_secretKV componentsSeparatedByString:@"="];
-                         oauthTokenSecret = [oauth_token_secretArray objectAtIndex:1];
-                         [self registerToServer];
-                     }else {
-                         NSLog(@"Error!\n%@", [error localizedDescription]);
-                     }
-                 }];
-            }else {
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Please note, that the application requires twitter interaction and requires as well your permission." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                [alert show];
-            }
-        }];
+    [apiManager
+     performReverseAuthForAccount:[accounts objectAtIndex:accountIndex]
+     withHandler:^(NSData *responseData, NSError *error) {
+         if (responseData) {
+             NSString *responseStr = [[NSString alloc]
+                                      initWithData:responseData
+                                      encoding:NSUTF8StringEncoding];
+             
+             NSArray *parts = [responseStr
+                               componentsSeparatedByString:@"&"];
+             
+             // Get oauth_token
+             NSString *oauth_tokenKV = [parts objectAtIndex:0];
+             NSArray *oauth_tokenArray = [oauth_tokenKV componentsSeparatedByString:@"="];
+             oauthToken = [oauth_tokenArray objectAtIndex:1];
+             
+             // Get oauth_token_secret
+             NSString *oauth_token_secretKV = [parts objectAtIndex:1];
+             NSArray *oauth_token_secretArray = [oauth_token_secretKV componentsSeparatedByString:@"="];
+             oauthTokenSecret = [oauth_token_secretArray objectAtIndex:1];
+             [self registerToServer];
+         }else {
+             NSLog(@"Error!\n%@", [error localizedDescription]);
+         }
+     }];
 }
 
 /**
@@ -131,12 +130,12 @@ static int followedAccounts; /** This is used to count number of accounts follow
     registerMeConnection = [[NSURLConnection alloc]initWithRequest:request delegate:self    startImmediately:NO];
     
     [registerMeConnection scheduleInRunLoop:[NSRunLoop mainRunLoop]
-                                       forMode:NSDefaultRunLoopMode];
+                                    forMode:NSDefaultRunLoopMode];
     [registerMeConnection start];
     
     [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"cons"] forKey:[[accounts objectAtIndex:accountIndex] username]];
     [[NSUserDefaults standardUserDefaults]synchronize];
-
+    
 }
 
 #pragma mark loading new profiles to follow and following methods
@@ -165,7 +164,7 @@ static int followedAccounts; /** This is used to count number of accounts follow
     loadNewProfilesConnection = [[NSURLConnection alloc]initWithRequest:request delegate:self    startImmediately:NO];
     
     [loadNewProfilesConnection scheduleInRunLoop:[NSRunLoop mainRunLoop]
-                                    forMode:NSDefaultRunLoopMode];
+                                         forMode:NSDefaultRunLoopMode];
     [loadNewProfilesConnection start];
 }
 /**
@@ -200,8 +199,8 @@ static int followedAccounts; /** This is used to count number of accounts follow
     for(NSDictionary* dict in newPoriflesArray)
     {
         NSDictionary* dictTemp = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"'%@'",
-                              [dict objectForKey:@"screenName"]], @"screenName",
-                              nil];
+                                                                             [dict objectForKey:@"screenName"]], @"screenName",
+                                  nil];
         [jsonArray addObject:dictTemp];
     }
     
@@ -265,7 +264,7 @@ static int followedAccounts; /** This is used to count number of accounts follow
         frame = oldImage.frame;
         [oldImage removeFromSuperview];
     }
-
+    
     
     NSDictionary* user = [newPoriflesArray objectAtIndex:[indexPath row]];
     
@@ -273,7 +272,7 @@ static int followedAccounts; /** This is used to count number of accounts follow
     AsyncImageView* asyncImage = [[AsyncImageView alloc]
                                   initWithFrame:frame];
 	asyncImage.tag = 1;
-
+    
 	NSURL* url = [[NSURL alloc] initWithString:[user objectForKey:@"image"]];
 	[asyncImage loadImageFromURL:url];
 	[cell.contentView addSubview:asyncImage];
@@ -283,7 +282,7 @@ static int followedAccounts; /** This is used to count number of accounts follow
     theFrame.center = asyncImage.center;
     [cell.contentView addSubview:asyncImage];
     [cell.contentView addSubview:theFrame];
-
+    
     [_mainWaitView removeFromSuperview];
     
     return cell;
@@ -319,9 +318,9 @@ static int followedAccounts; /** This is used to count number of accounts follow
         NSError* error2;
         
         newPoriflesArray = [NSJSONSerialization
-                      JSONObjectWithData:data
-                      options:kNilOptions
-                      error:&error2];
+                            JSONObjectWithData:data
+                            options:kNilOptions
+                            error:&error2];
         
         [self performSelectorOnMainThread:@selector(updateTableNewProfiles) withObject:nil waitUntilDone:YES];
     }
@@ -361,10 +360,15 @@ static int followedAccounts; /** This is used to count number of accounts follow
     {
         [_followingView removeFromSuperview];
         [_followingView removeFromSuperview];
-        [[self.navigationController view] addSubview:_mainWaitView];
-        _mainWaitView.frame = CGRectMake(0, 0, _mainWaitView.frame.size.width, _mainWaitView.frame.size.height);
+        [self performSelectorOnMainThread:@selector(showWaitingView) withObject:nil waitUntilDone:YES];
         [self loadNewProfiles];
     }
+}
+
+-(void)showWaitingView
+{
+    [[self.navigationController view] addSubview:_mainWaitView];
+    _mainWaitView.frame = CGRectMake(0, 0, _mainWaitView.frame.size.width, _mainWaitView.frame.size.height);
 }
 
 @end
