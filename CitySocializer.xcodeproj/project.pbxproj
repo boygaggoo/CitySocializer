@@ -33,6 +33,11 @@
 		04827506189F64F600878EC3 /* ETActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827504189F64F600878EC3 /* ETActivityIndicatorView.m */; };
 		04827509189F651400878EC3 /* twitter-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04827507189F651400878EC3 /* twitter-logo.png */; };
 		0482750A189F651400878EC3 /* twitter-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04827508189F651400878EC3 /* twitter-logo@2x.png */; };
+		04827510189F6D5700878EC3 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482750D189F6D5700878EC3 /* TWSignedRequest.m */; };
+		04827511189F6D5700878EC3 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482750F189F6D5700878EC3 /* TWAPIManager.m */; };
+		04827518189F6D6E00878EC3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827513189F6D6E00878EC3 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		04827519189F6D6E00878EC3 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827515189F6D6E00878EC3 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0482751A189F6D6E00878EC3 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827517189F6D6E00878EC3 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +86,16 @@
 		04827504189F64F600878EC3 /* ETActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETActivityIndicatorView.m; sourceTree = "<group>"; };
 		04827507189F651400878EC3 /* twitter-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-logo.png"; sourceTree = "<group>"; };
 		04827508189F651400878EC3 /* twitter-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-logo@2x.png"; sourceTree = "<group>"; };
+		0482750C189F6D5700878EC3 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
+		0482750D189F6D5700878EC3 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
+		0482750E189F6D5700878EC3 /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAPIManager.h; sourceTree = "<group>"; };
+		0482750F189F6D5700878EC3 /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
+		04827512189F6D6E00878EC3 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		04827513189F6D6E00878EC3 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		04827514189F6D6E00878EC3 /* OAuth+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OAuth+Additions.h"; sourceTree = "<group>"; };
+		04827515189F6D6E00878EC3 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
+		04827516189F6D6E00878EC3 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
+		04827517189F6D6E00878EC3 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +220,7 @@
 		048274F0189F62D700878EC3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0482750B189F6D3B00878EC3 /* Reverse OAuth */,
 				048274F4189F62F800878EC3 /* Loading VIew */,
 			);
 			name = Utils;
@@ -221,6 +237,23 @@
 				04827504189F64F600878EC3 /* ETActivityIndicatorView.m */,
 			);
 			name = "Loading VIew";
+			sourceTree = "<group>";
+		};
+		0482750B189F6D3B00878EC3 /* Reverse OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				0482750C189F6D5700878EC3 /* TWSignedRequest.h */,
+				0482750D189F6D5700878EC3 /* TWSignedRequest.m */,
+				0482750E189F6D5700878EC3 /* TWAPIManager.h */,
+				0482750F189F6D5700878EC3 /* TWAPIManager.m */,
+				04827512189F6D6E00878EC3 /* NSData+Base64.h */,
+				04827513189F6D6E00878EC3 /* NSData+Base64.m */,
+				04827514189F6D6E00878EC3 /* OAuth+Additions.h */,
+				04827515189F6D6E00878EC3 /* OAuth+Additions.m */,
+				04827516189F6D6E00878EC3 /* OAuthCore.h */,
+				04827517189F6D6E00878EC3 /* OAuthCore.m */,
+			);
+			name = "Reverse OAuth";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +358,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0482751A189F6D6E00878EC3 /* OAuthCore.m in Sources */,
+				04827519189F6D6E00878EC3 /* OAuth+Additions.m in Sources */,
 				04827506189F64F600878EC3 /* ETActivityIndicatorView.m in Sources */,
 				048274CE189F5B4A00878EC3 /* ViewController.m in Sources */,
+				04827510189F6D5700878EC3 /* TWSignedRequest.m in Sources */,
+				04827511189F6D5700878EC3 /* TWAPIManager.m in Sources */,
 				048274EF189F629E00878EC3 /* ChooseAccountViewController.m in Sources */,
 				048274F3189F62F200878EC3 /* RNBlurModalView.m in Sources */,
 				04827505189F64F600878EC3 /* Circle.m in Sources */,
+				04827518189F6D6E00878EC3 /* NSData+Base64.m in Sources */,
 				048274C8189F5B4A00878EC3 /* AppDelegate.m in Sources */,
 				048274C4189F5B4A00878EC3 /* main.m in Sources */,
 			);
