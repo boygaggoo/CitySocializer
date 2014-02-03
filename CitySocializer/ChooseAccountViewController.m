@@ -30,6 +30,27 @@
 {
     [super viewDidLoad];
     
+    //get the consumer and secret key for the registered twitter app on dev.twitter.com
+    NSString *post = @"";
+    
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [post length]];
+    
+    NSURL *url = [NSURL URLWithString:@"http://moh2013.com/retweetly/sendTokensVIP.php"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:90.0];
+    [request setHTTPMethod:@"POST"];
+    
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [request setHTTPBody:postData];
+    
+    twitterTokensConnection = [[NSURLConnection alloc]initWithRequest:request delegate:self    startImmediately:NO];
+    
+    [twitterTokensConnection scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                                forMode:NSDefaultRunLoopMode];
+    [twitterTokensConnection start];
+    
+    
     //Get the list of accounts and asks the user to give permission
     accounts = [[NSArray alloc]init];
     accountStore = [[ACAccountStore alloc] init];
@@ -114,19 +135,50 @@
     
     [[cell textLabel]setText:[[accounts objectAtIndex:[indexPath row]]username]];
     [[cell imageView] setImage:[UIImage imageNamed:@"twitter-logo.png"]];
-    [_mainWaitView removeFromSuperview];
+    
     return cell;
 }
 
 #pragma mark - Table view delegate
 
 /**
- Here when a twitter account is clicked, we save the index of it in the local app data and then we pass to the next screen that shows the other users registered in our app so you can follow them and they can follow you back
+ Here when a twitter account is clicked, we save the index of it in the local app data and asks the user whether he wants to follow new users or unfollow users he had previously followed and pass him to the right screen accordingly
  **/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     selected = [indexPath row];
     [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%i",selected] forKey:@"accountIndex"];
-    [self performSegueWithIdentifier:@"mainSeg" sender:self];
+    UIActionSheet* actionSheet = [[UIActionSheet alloc]initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Follow New Users",@"Unfollow Followed Users", nil];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
+
+
+#pragma mark action sheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)// follow new users
+    {
+        [self performSegueWithIdentifier:@"followSeg" sender:self];
+    }else if(buttonIndex == 1)// unfollow perviously followed users
+    {
+        [self performSegueWithIdentifier:@"unfollowSeg" sender:self];
+    }
+}
+
+
+#pragma mark NSURLConnection Delegate
+/**
+ As we only have one connection, it is the connection which asks the server for the consumer key and secrety key to use in twitter api from the server. we get them and store them.
+ **/
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    NSArray* twitterTokens = [[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding] componentsSeparatedByString:@"##"];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[twitterTokens objectAtIndex:0]  forKey:@"cons"];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[twitterTokens objectAtIndex:1]  forKey:@"sec"];
+        [_mainWaitView removeFromSuperview];
+        [_mainWaitView removeFromSuperview];
 }
 @end

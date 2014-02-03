@@ -70,7 +70,7 @@
                         <outlet property="mainHeaderLabel" destination="jmP-Xj-Zwh" id="l8j-Kc-v3t"/>
                         <outlet property="mainHeaderView" destination="BCJ-Gr-1MB" id="g9H-Gu-dnR"/>
                         <outlet property="mainWaitView" destination="F6h-VV-G10" id="tDx-8a-UXU"/>
-                        <segue destination="DUA-iW-9ej" kind="push" identifier="mainSeg" id="dZV-qL-2ev"/>
+                        <segue destination="DUA-iW-9ej" kind="push" identifier="followSeg" id="dZV-qL-2ev"/>
                     </connections>
                 </tableViewController>
                 <view contentMode="scaleToFill" id="BCJ-Gr-1MB" userLabel="mainHeaderView">
