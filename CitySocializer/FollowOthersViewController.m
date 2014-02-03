@@ -45,15 +45,14 @@ static int followedAccounts; /** This is used to count number of accounts follow
     
     accountIndex = [[[NSUserDefaults standardUserDefaults]stringForKey:@"accountIndex"]intValue];
     
-    /*// check if we need to update our credentionals
+    // check if we need to update our credentionals
     if([[NSUserDefaults standardUserDefaults]boolForKey:@"shouldUpdate"]) // yes we have to make reverse OAuth and saves the credentionals to the server database for further usages
     {
         [self reverseOAuth];
     }else // No, we already registered so we just ask the server to load us new account so we can follow them up
     {
         [self loadNewProfiles];
-    }*/
-    [self reverseOAuth];
+    }
 }
 
 #pragma mark reverse OAuth Logic
@@ -134,6 +133,9 @@ static int followedAccounts; /** This is used to count number of accounts follow
     [registerMeConnection scheduleInRunLoop:[NSRunLoop mainRunLoop]
                                        forMode:NSDefaultRunLoopMode];
     [registerMeConnection start];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"cons"] forKey:[[accounts objectAtIndex:accountIndex] username]];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 
 }
 
