@@ -159,10 +159,16 @@
         
         // Delete the role object that was swiped
         Followed *followToDelete = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        Actions *action = [NSEntityDescription insertNewObjectForEntityForName:@"Actions"
+                                                        inManagedObjectContext:self.managedObjectContext];
+        
+        action.actionDate = [NSDate date];
+        action.doneBy = currentUser;
+        action.actionDesc = [NSString stringWithFormat:@"Un Followed %@",[followToDelete name]];
+        [self.managedObjectContext save:nil];
         SLRequest *requestt = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/friendships/destroy.json"] parameters:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[followToDelete name], nil] forKeys:[NSArray arrayWithObjects:@"screen_name",nil]]];
         [requestt setAccount:[accounts objectAtIndex:accountIndex]];
         [requestt performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
-            [self performSelectorOnMainThread:@selector(updateUnfollow) withObject:nil waitUntilDone:YES];
         }];
         NSLog(@"Deleting (%@)", followToDelete.name);
         [self.managedObjectContext deleteObject:followToDelete];
