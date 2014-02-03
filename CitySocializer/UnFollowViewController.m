@@ -249,6 +249,9 @@
     {
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Opps" message:@"You did not follow anyone" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil];
         [alert show];
+        [_waitView removeFromSuperview];
+        [_waitView removeFromSuperview];
+
     }
     [[self tableView]reloadData];
     [[self tableView]setNeedsDisplay];

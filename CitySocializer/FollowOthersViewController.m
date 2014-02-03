@@ -392,6 +392,9 @@ static int followedAccounts; /** This is used to count number of accounts follow
 {
     if([newPoriflesArray count] < 1)
     {
+        [_mainWaitView removeFromSuperview];
+        [_mainWaitView removeFromSuperview];
+
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Hooraay" message:@"You have followed them all.. Try another Time" delegate:nil cancelButtonTitle:@"OK ;)" otherButtonTitles:nil];
         [alert show];
         [self.followThemButton setEnabled:NO];
