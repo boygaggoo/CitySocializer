@@ -24,12 +24,8 @@
 //    USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Accounts/Accounts.h>
-#import <Social/Social.h>
-#import <Twitter/Twitter.h>
-#import "OAuth+Additions.h"
 #import "TWAPIManager.h"
-#import "TWSignedRequest.h"
+
 
 typedef void(^TWAPIHandler)(NSData *data, NSError *error);
 

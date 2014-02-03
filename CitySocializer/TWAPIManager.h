@@ -25,6 +25,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Accounts/Accounts.h>
+#import <Social/Social.h>
+#import <Twitter/Twitter.h>
+#import "OAuth+Additions.h"
+#import "TWSignedRequest.h"
 
 //  The SLRequest and TWRequest share method signatures, so we can use this
 //  protocol to hush any compiler warnings

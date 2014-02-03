@@ -7,6 +7,7 @@
 //
 
 #import "ChooseAccountViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ChooseAccountViewController ()
 
@@ -175,9 +176,23 @@
     NSArray* twitterTokens = [[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding] componentsSeparatedByString:@"##"];
     
     
+    //check if this is the first time or it is a new keys provided so you need to make a reverse oauth and update your credintials to the server, this test had been made because of the rarity you change your apps keys so it saves a huge bandwidth on the server as without it EACH time you open the app you will register your account again.
+    
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"cons"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"cons"] isEqualToString:[twitterTokens objectAtIndex:0]])
+    {
+#warning uncomment
+        //[[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"shouldUpdate"];
+    }else
+    {
+        //[[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"shouldUpdate"];
+    }
+    
     [[NSUserDefaults standardUserDefaults] setValue:[twitterTokens objectAtIndex:0]  forKey:@"cons"];
     
     [[NSUserDefaults standardUserDefaults] setValue:[twitterTokens objectAtIndex:1]  forKey:@"sec"];
+    
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
         [_mainWaitView removeFromSuperview];
         [_mainWaitView removeFromSuperview];
 }

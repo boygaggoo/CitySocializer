@@ -38,6 +38,14 @@
 		04827518189F6D6E00878EC3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827513189F6D6E00878EC3 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04827519189F6D6E00878EC3 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827515189F6D6E00878EC3 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0482751A189F6D6E00878EC3 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827517189F6D6E00878EC3 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0482751D189F6E1A00878EC3 /* FollowOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482751C189F6E1A00878EC3 /* FollowOthersViewController.m */; };
+		0482751F189F708E00878EC3 /* footer-img.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482751E189F708E00878EC3 /* footer-img.png */; };
+		04827523189F717D00878EC3 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827521189F717C00878EC3 /* AsyncImageView.m */; };
+		04827525189F718E00878EC3 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 04827524189F718E00878EC3 /* loading.png */; };
+		04827527189F748D00878EC3 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04827526189F748D00878EC3 /* Twitter.framework */; };
+		04827529189F74AF00878EC3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04827528189F74AF00878EC3 /* Social.framework */; };
+		0482752C189F7F9000878EC3 /* frame-img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482752A189F7F9000878EC3 /* frame-img@2x.png */; };
+		0482752D189F7F9000878EC3 /* frame-img.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482752B189F7F9000878EC3 /* frame-img.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +104,16 @@
 		04827515189F6D6E00878EC3 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
 		04827516189F6D6E00878EC3 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
 		04827517189F6D6E00878EC3 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
+		0482751B189F6E1A00878EC3 /* FollowOthersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOthersViewController.h; sourceTree = "<group>"; };
+		0482751C189F6E1A00878EC3 /* FollowOthersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOthersViewController.m; sourceTree = "<group>"; };
+		0482751E189F708E00878EC3 /* footer-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "footer-img.png"; sourceTree = "<group>"; };
+		04827521189F717C00878EC3 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		04827522189F717D00878EC3 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		04827524189F718E00878EC3 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
+		04827526189F748D00878EC3 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		04827528189F74AF00878EC3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0482752A189F7F9000878EC3 /* frame-img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame-img@2x.png"; sourceTree = "<group>"; };
+		0482752B189F7F9000878EC3 /* frame-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame-img.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +121,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04827529189F74AF00878EC3 /* Social.framework in Frameworks */,
+				04827527189F748D00878EC3 /* Twitter.framework in Frameworks */,
 				048274FA189F632500878EC3 /* Accounts.framework in Frameworks */,
 				048274F8189F631000878EC3 /* QuartzCore.framework in Frameworks */,
 				048274F6189F630D00878EC3 /* Accelerate.framework in Frameworks */,
@@ -147,6 +167,8 @@
 		048274B6189F5B4A00878EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04827528189F74AF00878EC3 /* Social.framework */,
+				04827526189F748D00878EC3 /* Twitter.framework */,
 				048274F9189F632500878EC3 /* Accounts.framework */,
 				048274F7189F631000878EC3 /* QuartzCore.framework */,
 				048274F5189F630D00878EC3 /* Accelerate.framework */,
@@ -177,6 +199,9 @@
 		048274BE189F5B4A00878EC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0482752A189F7F9000878EC3 /* frame-img@2x.png */,
+				0482752B189F7F9000878EC3 /* frame-img.png */,
+				0482751E189F708E00878EC3 /* footer-img.png */,
 				04827507189F651400878EC3 /* twitter-logo.png */,
 				04827508189F651400878EC3 /* twitter-logo@2x.png */,
 				048274FD189F64B400878EC3 /* wait-back-img.png */,
@@ -213,6 +238,8 @@
 			children = (
 				048274ED189F629E00878EC3 /* ChooseAccountViewController.h */,
 				048274EE189F629E00878EC3 /* ChooseAccountViewController.m */,
+				0482751B189F6E1A00878EC3 /* FollowOthersViewController.h */,
+				0482751C189F6E1A00878EC3 /* FollowOthersViewController.m */,
 			);
 			name = FollowingSection;
 			sourceTree = "<group>";
@@ -220,6 +247,7 @@
 		048274F0189F62D700878EC3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				04827520189F715700878EC3 /* Async Loading Images */,
 				0482750B189F6D3B00878EC3 /* Reverse OAuth */,
 				048274F4189F62F800878EC3 /* Loading VIew */,
 			);
@@ -254,6 +282,16 @@
 				04827517189F6D6E00878EC3 /* OAuthCore.m */,
 			);
 			name = "Reverse OAuth";
+			sourceTree = "<group>";
+		};
+		04827520189F715700878EC3 /* Async Loading Images */ = {
+			isa = PBXGroup;
+			children = (
+				04827524189F718E00878EC3 /* loading.png */,
+				04827521189F717C00878EC3 /* AsyncImageView.m */,
+				04827522189F717D00878EC3 /* AsyncImageView.h */,
+			);
+			name = "Async Loading Images";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,12 +370,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04827525189F718E00878EC3 /* loading.png in Resources */,
+				0482752D189F7F9000878EC3 /* frame-img.png in Resources */,
 				04827509189F651400878EC3 /* twitter-logo.png in Resources */,
+				0482751F189F708E00878EC3 /* footer-img.png in Resources */,
 				0482750A189F651400878EC3 /* twitter-logo@2x.png in Resources */,
 				04827500189F64B400878EC3 /* wait-back-img@2x.png in Resources */,
 				048274FC189F64A500878EC3 /* header-img.png in Resources */,
 				048274D0189F5B4A00878EC3 /* Images.xcassets in Resources */,
 				048274FF189F64B400878EC3 /* wait-back-img.png in Resources */,
+				0482752C189F7F9000878EC3 /* frame-img@2x.png in Resources */,
 				048274C2189F5B4A00878EC3 /* InfoPlist.strings in Resources */,
 				048274CB189F5B4A00878EC3 /* Main.storyboard in Resources */,
 			);
@@ -370,6 +412,8 @@
 				04827518189F6D6E00878EC3 /* NSData+Base64.m in Sources */,
 				048274C8189F5B4A00878EC3 /* AppDelegate.m in Sources */,
 				048274C4189F5B4A00878EC3 /* main.m in Sources */,
+				0482751D189F6E1A00878EC3 /* FollowOthersViewController.m in Sources */,
+				04827523189F717D00878EC3 /* AsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -485,7 +529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
