@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 OsamaMac. All rights reserved.
 //
 
+#import <Twitter/Twitter.h>
 #import "UnFollowViewController.h"
 #import "AsyncImageView.h"
 #import "Actions.h"
@@ -32,6 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [[self.navigationController view] addSubview:_waitView];
+    _waitView.frame = CGRectMake(0, 0, _waitView.frame.size.width, _waitView.frame.size.height);
+
     
     accountIndex = [[[NSUserDefaults standardUserDefaults]stringForKey:@"accountIndex"]intValue];
     
@@ -136,9 +141,33 @@
     [cell.contentView addSubview:asyncImage];
     [cell.contentView addSubview:theFrame];
     
-//    [_mainWaitView removeFromSuperview];
+    [_waitView removeFromSuperview];
 
     return cell;
+}
+
+#pragma mark table delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIActionSheet* sheet = [[UIActionSheet alloc]initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Un Follow" otherButtonTitles:nil];
+    [sheet showFromTabBar:self.tabBarController.tabBar];
+}
+
+#pragma action sheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        [[self.navigationController view] addSubview:_waitView];
+        _waitView.frame = CGRectMake(0, 0, _waitView.frame.size.width, _waitView.frame.size.height);
+
+        Followed* follow = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+        SLRequest *requestt = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/friendships/destroy.json"] parameters:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[follow name], nil] forKeys:[NSArray arrayWithObjects:@"screen_name",nil]]];
+        [requestt setAccount:[accounts objectAtIndex:accountIndex]];
+        [requestt performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
+            [self performSelectorOnMainThread:@selector(updateUnfollow) withObject:nil waitUntilDone:YES];
+        }];
+    }
 }
 
 #pragma mark database methods
@@ -212,6 +241,15 @@
     }
     [[self tableView]reloadData];
     [[self tableView]setNeedsDisplay];
+}
+
+-(void)updateUnfollow
+{
+    [_waitView removeFromSuperview];
+    [_waitView removeFromSuperview];
+    Followed* follow = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+    [self.managedObjectContext deleteObject:follow];
+    [self setupFetchedResultsController];
 }
 
 
