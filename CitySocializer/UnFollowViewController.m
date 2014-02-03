@@ -147,26 +147,31 @@
 }
 
 #pragma mark table delegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIActionSheet* sheet = [[UIActionSheet alloc]initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Un Follow" otherButtonTitles:nil];
-    [sheet showFromTabBar:self.tabBarController.tabBar];
-}
 
-#pragma action sheet delegate
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 0)
-    {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         [[self.navigationController view] addSubview:_waitView];
         _waitView.frame = CGRectMake(0, 0, _waitView.frame.size.width, _waitView.frame.size.height);
-
-        Followed* follow = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-        SLRequest *requestt = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/friendships/destroy.json"] parameters:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[follow name], nil] forKeys:[NSArray arrayWithObjects:@"screen_name",nil]]];
+        
+        [self.tableView beginUpdates]; // Avoid  NSInternalInconsistencyException
+        
+        // Delete the role object that was swiped
+        Followed *followToDelete = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        SLRequest *requestt = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/friendships/destroy.json"] parameters:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[followToDelete name], nil] forKeys:[NSArray arrayWithObjects:@"screen_name",nil]]];
         [requestt setAccount:[accounts objectAtIndex:accountIndex]];
         [requestt performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
             [self performSelectorOnMainThread:@selector(updateUnfollow) withObject:nil waitUntilDone:YES];
         }];
+        NSLog(@"Deleting (%@)", followToDelete.name);
+        [self.managedObjectContext deleteObject:followToDelete];
+        [self.managedObjectContext save:nil];
+        
+        // Delete the (now empty) row on the table
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self setupFetchedResultsController];
+        [self.tableView endUpdates];
     }
 }
 
@@ -247,9 +252,6 @@
 {
     [_waitView removeFromSuperview];
     [_waitView removeFromSuperview];
-    Followed* follow = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-    [self.managedObjectContext deleteObject:follow];
-    [self setupFetchedResultsController];
 }
 
 
