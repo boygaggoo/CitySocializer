@@ -21,6 +21,18 @@
 		048274D9189F5B4A00878EC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048274BB189F5B4A00878EC3 /* UIKit.framework */; };
 		048274E1189F5B4A00878EC3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 048274DF189F5B4A00878EC3 /* InfoPlist.strings */; };
 		048274E3189F5B4A00878EC3 /* CitySocializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048274E2189F5B4A00878EC3 /* CitySocializerTests.m */; };
+		048274EF189F629E00878EC3 /* ChooseAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048274EE189F629E00878EC3 /* ChooseAccountViewController.m */; };
+		048274F3189F62F200878EC3 /* RNBlurModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048274F2189F62F200878EC3 /* RNBlurModalView.m */; };
+		048274F6189F630D00878EC3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048274F5189F630D00878EC3 /* Accelerate.framework */; };
+		048274F8189F631000878EC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048274F7189F631000878EC3 /* QuartzCore.framework */; };
+		048274FA189F632500878EC3 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048274F9189F632500878EC3 /* Accounts.framework */; };
+		048274FC189F64A500878EC3 /* header-img.png in Resources */ = {isa = PBXBuildFile; fileRef = 048274FB189F64A500878EC3 /* header-img.png */; };
+		048274FF189F64B400878EC3 /* wait-back-img.png in Resources */ = {isa = PBXBuildFile; fileRef = 048274FD189F64B400878EC3 /* wait-back-img.png */; };
+		04827500189F64B400878EC3 /* wait-back-img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048274FE189F64B400878EC3 /* wait-back-img@2x.png */; };
+		04827505189F64F600878EC3 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827502189F64F600878EC3 /* Circle.m */; };
+		04827506189F64F600878EC3 /* ETActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827504189F64F600878EC3 /* ETActivityIndicatorView.m */; };
+		04827509189F651400878EC3 /* twitter-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04827507189F651400878EC3 /* twitter-logo.png */; };
+		0482750A189F651400878EC3 /* twitter-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04827508189F651400878EC3 /* twitter-logo@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +65,22 @@
 		048274DE189F5B4A00878EC3 /* CitySocializerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CitySocializerTests-Info.plist"; sourceTree = "<group>"; };
 		048274E0189F5B4A00878EC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		048274E2189F5B4A00878EC3 /* CitySocializerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CitySocializerTests.m; sourceTree = "<group>"; };
+		048274ED189F629E00878EC3 /* ChooseAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseAccountViewController.h; sourceTree = "<group>"; };
+		048274EE189F629E00878EC3 /* ChooseAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseAccountViewController.m; sourceTree = "<group>"; };
+		048274F1189F62F200878EC3 /* RNBlurModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNBlurModalView.h; sourceTree = "<group>"; };
+		048274F2189F62F200878EC3 /* RNBlurModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNBlurModalView.m; sourceTree = "<group>"; };
+		048274F5189F630D00878EC3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		048274F7189F631000878EC3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		048274F9189F632500878EC3 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		048274FB189F64A500878EC3 /* header-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-img.png"; sourceTree = "<group>"; };
+		048274FD189F64B400878EC3 /* wait-back-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wait-back-img.png"; sourceTree = "<group>"; };
+		048274FE189F64B400878EC3 /* wait-back-img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wait-back-img@2x.png"; sourceTree = "<group>"; };
+		04827501189F64F600878EC3 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
+		04827502189F64F600878EC3 /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
+		04827503189F64F600878EC3 /* ETActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETActivityIndicatorView.h; sourceTree = "<group>"; };
+		04827504189F64F600878EC3 /* ETActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETActivityIndicatorView.m; sourceTree = "<group>"; };
+		04827507189F651400878EC3 /* twitter-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-logo.png"; sourceTree = "<group>"; };
+		04827508189F651400878EC3 /* twitter-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-logo@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +88,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048274FA189F632500878EC3 /* Accounts.framework in Frameworks */,
+				048274F8189F631000878EC3 /* QuartzCore.framework in Frameworks */,
+				048274F6189F630D00878EC3 /* Accelerate.framework in Frameworks */,
 				048274BA189F5B4A00878EC3 /* CoreGraphics.framework in Frameworks */,
 				048274BC189F5B4A00878EC3 /* UIKit.framework in Frameworks */,
 				048274B8189F5B4A00878EC3 /* Foundation.framework in Frameworks */,
@@ -101,6 +132,9 @@
 		048274B6189F5B4A00878EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				048274F9189F632500878EC3 /* Accounts.framework */,
+				048274F7189F631000878EC3 /* QuartzCore.framework */,
+				048274F5189F630D00878EC3 /* Accelerate.framework */,
 				048274B7189F5B4A00878EC3 /* Foundation.framework */,
 				048274B9189F5B4A00878EC3 /* CoreGraphics.framework */,
 				048274BB189F5B4A00878EC3 /* UIKit.framework */,
@@ -112,6 +146,8 @@
 		048274BD189F5B4A00878EC3 /* CitySocializer */ = {
 			isa = PBXGroup;
 			children = (
+				048274F0189F62D700878EC3 /* Utils */,
+				048274EC189F628E00878EC3 /* FollowingSection */,
 				048274C6189F5B4A00878EC3 /* AppDelegate.h */,
 				048274C7189F5B4A00878EC3 /* AppDelegate.m */,
 				048274C9189F5B4A00878EC3 /* Main.storyboard */,
@@ -126,6 +162,11 @@
 		048274BE189F5B4A00878EC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				04827507189F651400878EC3 /* twitter-logo.png */,
+				04827508189F651400878EC3 /* twitter-logo@2x.png */,
+				048274FD189F64B400878EC3 /* wait-back-img.png */,
+				048274FE189F64B400878EC3 /* wait-back-img@2x.png */,
+				048274FB189F64A500878EC3 /* header-img.png */,
 				048274BF189F5B4A00878EC3 /* CitySocializer-Info.plist */,
 				048274C0189F5B4A00878EC3 /* InfoPlist.strings */,
 				048274C3189F5B4A00878EC3 /* main.m */,
@@ -150,6 +191,36 @@
 				048274DF189F5B4A00878EC3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		048274EC189F628E00878EC3 /* FollowingSection */ = {
+			isa = PBXGroup;
+			children = (
+				048274ED189F629E00878EC3 /* ChooseAccountViewController.h */,
+				048274EE189F629E00878EC3 /* ChooseAccountViewController.m */,
+			);
+			name = FollowingSection;
+			sourceTree = "<group>";
+		};
+		048274F0189F62D700878EC3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				048274F4189F62F800878EC3 /* Loading VIew */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		048274F4189F62F800878EC3 /* Loading VIew */ = {
+			isa = PBXGroup;
+			children = (
+				048274F1189F62F200878EC3 /* RNBlurModalView.h */,
+				048274F2189F62F200878EC3 /* RNBlurModalView.m */,
+				04827501189F64F600878EC3 /* Circle.h */,
+				04827502189F64F600878EC3 /* Circle.m */,
+				04827503189F64F600878EC3 /* ETActivityIndicatorView.h */,
+				04827504189F64F600878EC3 /* ETActivityIndicatorView.m */,
+			);
+			name = "Loading VIew";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +299,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04827509189F651400878EC3 /* twitter-logo.png in Resources */,
+				0482750A189F651400878EC3 /* twitter-logo@2x.png in Resources */,
+				04827500189F64B400878EC3 /* wait-back-img@2x.png in Resources */,
+				048274FC189F64A500878EC3 /* header-img.png in Resources */,
 				048274D0189F5B4A00878EC3 /* Images.xcassets in Resources */,
+				048274FF189F64B400878EC3 /* wait-back-img.png in Resources */,
 				048274C2189F5B4A00878EC3 /* InfoPlist.strings in Resources */,
 				048274CB189F5B4A00878EC3 /* Main.storyboard in Resources */,
 			);
@@ -249,7 +325,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04827506189F64F600878EC3 /* ETActivityIndicatorView.m in Sources */,
 				048274CE189F5B4A00878EC3 /* ViewController.m in Sources */,
+				048274EF189F629E00878EC3 /* ChooseAccountViewController.m in Sources */,
+				048274F3189F62F200878EC3 /* RNBlurModalView.m in Sources */,
+				04827505189F64F600878EC3 /* Circle.m in Sources */,
 				048274C8189F5B4A00878EC3 /* AppDelegate.m in Sources */,
 				048274C4189F5B4A00878EC3 /* main.m in Sources */,
 			);

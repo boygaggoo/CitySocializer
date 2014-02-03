@@ -42,16 +42,16 @@
             </objects>
             <point key="canvasLocation" x="298" y="-277"/>
         </scene>
-        <!--Table View Controller - Choose Your Account-->
+        <!--Choose Account View Controller - Choose Your Account-->
         <scene sceneID="n9L-Gg-9Jq">
             <objects>
-                <tableViewController id="p9D-cu-GAJ" sceneMemberID="viewController">
+                <tableViewController id="p9D-cu-GAJ" customClass="ChooseAccountViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jgg-s2-bA6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nkX-Od-Pe6">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccountsCell" id="nkX-Od-Pe6">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nkX-Od-Pe6" id="K9J-ar-RD0">
@@ -67,9 +67,67 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Choose Your Account" id="eFT-nV-UXg"/>
                     <connections>
-                        <segue destination="DUA-iW-9ej" kind="push" id="dZV-qL-2ev"/>
+                        <outlet property="mainHeaderLabel" destination="jmP-Xj-Zwh" id="l8j-Kc-v3t"/>
+                        <outlet property="mainHeaderView" destination="BCJ-Gr-1MB" id="g9H-Gu-dnR"/>
+                        <outlet property="mainWaitView" destination="F6h-VV-G10" id="tDx-8a-UXU"/>
+                        <segue destination="DUA-iW-9ej" kind="push" identifier="mainSeg" id="dZV-qL-2ev"/>
                     </connections>
                 </tableViewController>
+                <view contentMode="scaleToFill" id="BCJ-Gr-1MB" userLabel="mainHeaderView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="header-img.png" translatesAutoresizingMaskIntoConstraints="NO" id="oRK-ys-QvX">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmP-Xj-Zwh">
+                            <rect key="frame" x="0.0" y="2" width="320" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </view>
+                <view contentMode="scaleToFill" id="F6h-VV-G10" userLabel="mainWaitView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-el-k73">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="569"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="wait-back-img.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tfo-g1-Mrh">
+                            <rect key="frame" x="40" y="155" width="240" height="160"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7zS-Ts-fj2">
+                            <rect key="frame" x="142" y="183" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="جاري تحميل الحسابات الرجاء الإنتظار" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="174" translatesAutoresizingMaskIntoConstraints="NO" id="rCJ-jn-3yb">
+                            <rect key="frame" x="73" y="241" width="174" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4I-Rj-VVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="807" y="-283"/>
@@ -152,6 +210,10 @@
             <point key="canvasLocation" x="801" y="379"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="header-img.png" width="320" height="25"/>
+        <image name="wait-back-img.png" width="240" height="160"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
