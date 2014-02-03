@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <Accounts/Accounts.h>
 #import "TWAPIManager.h"
+#import "CoreDataTableViewController.h"
+#import "User.h"
 
 @interface FollowOthersViewController : UITableViewController<NSURLConnectionDataDelegate>
 {
@@ -32,6 +34,8 @@
     TWAPIManager *apiManager; /*This is used to do the reverse OAuth process*/
     
     NSURLConnection* registerMeConnection; /*This is the connection that stores the login in credentionals to the server database */
+    
+    User* currentUser; /** Used to get reference for the current use in the core data so we can store his actions and all users he followed for further notice**/
 }
 
 @property (strong, nonatomic) IBOutlet UIView *waitView;
@@ -39,6 +43,10 @@
 @property (strong, nonatomic) IBOutlet UIView *theFooterView;
 @property (strong, nonatomic) IBOutlet UILabel *waitLabel;
 @property (strong, nonatomic) IBOutlet UIView *followingView;
+/** The variables used to fetch and manage the core data throught the application **/
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (weak, nonatomic) IBOutlet UIProgressView *followingProgess;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *followThemButton;
 - (IBAction)followThemClicked:(id)sender;

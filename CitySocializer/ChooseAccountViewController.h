@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Accounts/Accounts.h>
+#import "CoreDataTableViewController.h"
 
 @interface ChooseAccountViewController : UITableViewController<UIActionSheetDelegate,NSURLConnectionDataDelegate>
 {
@@ -25,6 +26,9 @@
 @property (strong, nonatomic) IBOutlet UIView *mainHeaderView;
 @property (strong, nonatomic) IBOutlet UILabel *mainHeaderLabel;
 
+/** The variables used to fetch and manage the core data throught the application **/
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 

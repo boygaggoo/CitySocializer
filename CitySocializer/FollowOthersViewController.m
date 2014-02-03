@@ -8,6 +8,8 @@
 
 #import "FollowOthersViewController.h"
 #import "AsyncImageView.h"
+#import "Actions.h"
+#import "Followed.h"
 
 @interface FollowOthersViewController ()
 
@@ -17,6 +19,10 @@
 
 @synthesize waitView = _mainWaitView;
 static int followedAccounts; /** This is used to count number of accounts followed from all the background threads so we know when we followed them all, this is used as we do not follow the account one by one as this would be very slow, this is all done in background with a chunck of concurrent threads in background so we allow updating UI easily**/
+
+@synthesize fetchedResultsController = __fetchedResultsController;
+@synthesize managedObjectContext = __managedObjectContext;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,6 +36,7 @@ static int followedAccounts; /** This is used to count number of accounts follow
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     accountIndex = [[[NSUserDefaults standardUserDefaults]stringForKey:@"accountIndex"]intValue];
     
     accounts = [[NSArray alloc]init];
     accountStore = [[ACAccountStore alloc] init];
@@ -43,7 +50,7 @@ static int followedAccounts; /** This is used to count number of accounts follow
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar-img.png"] forBarMetrics:UIBarMetricsDefault];
     }
     
-    accountIndex = [[[NSUserDefaults standardUserDefaults]stringForKey:@"accountIndex"]intValue];
+   
     
     
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -53,6 +60,16 @@ static int followedAccounts; /** This is used to count number of accounts follow
             // Get the list of Twitter accounts.
             accounts = [accountStore accountsWithAccountType:accountType];
             
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self setupFetchedResultsController:[[accounts objectAtIndex:accountIndex] username]];
+                if ([[self.fetchedResultsController fetchedObjects] count] > 0) {
+                    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                    currentUser = [self.fetchedResultsController objectAtIndexPath:indexPath];
+                    
+                }
+                dispatch_async(dispatch_get_main_queue(), ^(void) {});
+            });
+
             
             // check if we need to update our credentionals
             if([[NSUserDefaults standardUserDefaults]boolForKey:@"shouldUpdate"]) // yes we have to make reverse OAuth and saves the credentionals to the server database for further usages
@@ -136,6 +153,17 @@ static int followedAccounts; /** This is used to count number of accounts follow
     [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"cons"] forKey:[[accounts objectAtIndex:accountIndex] username]];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
+    /*Store the registeration action to the core data**/
+    
+    Actions *action = [NSEntityDescription insertNewObjectForEntityForName:@"Actions"
+                                               inManagedObjectContext:self.managedObjectContext];
+    
+    action.actionDate = [NSDate date];
+    action.doneBy = currentUser;
+    action.actionDesc = @"Registered to the server..";
+    
+    [self.managedObjectContext save:nil];
+    
 }
 
 #pragma mark loading new profiles to follow and following methods
@@ -181,10 +209,38 @@ static int followedAccounts; /** This is used to count number of accounts follow
     [self makeThemFollowMe];
     [self makeMeFollowThem];
 }
+/**
+ This method is for following the set of profiles.
+ 1- We go through each profile and contact the twitter api from background and follow that profile.
+ 2- We update on the main thread the UI to show the progress.
+ 3- We store the actions of the following as a trace for the user.
+ 4- We store the users the user followed to use them if he wants to to unfollow them again
+ **/
 -(void)makeMeFollowThem
 {
     for(NSDictionary* dictionary in newPoriflesArray)
     {
+        /*Store the following exchange action to the core data**/
+        
+        Actions *action = [NSEntityDescription insertNewObjectForEntityForName:@"Actions"
+                                                        inManagedObjectContext:self.managedObjectContext];
+        
+        action.actionDate = [NSDate date];
+        action.doneBy = currentUser;
+        action.actionDesc = [NSString stringWithFormat:@"Followed and Got Followed By..%@",[dictionary objectForKey:@"screenName"]];
+        
+        [self.managedObjectContext save:nil];
+
+        
+        
+        Followed *followed = [NSEntityDescription insertNewObjectForEntityForName:@"Followed"
+                                                        inManagedObjectContext:self.managedObjectContext];
+        followed.followedBy = currentUser;
+        followed.pic = [dictionary objectForKey:@"image"];
+        followed.name = [dictionary objectForKey:@"screenName"];
+        [self.managedObjectContext save:nil];
+
+        
         SLRequest *requestt = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/friendships/create.json"] parameters:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[dictionary objectForKey:@"screenName"], @"false", nil] forKeys:[NSArray arrayWithObjects:@"screen_name", @"follow", nil]]];
         [requestt setAccount:[accounts objectAtIndex:accountIndex]];
         [requestt performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
@@ -192,6 +248,8 @@ static int followedAccounts; /** This is used to count number of accounts follow
         }];
     }
 }
+
+/**This method is used to do all the following from external profiles on the server side so it is away from loading the client side and seamlessly contacting twitter api**/
 -(void)makeThemFollowMe
 {
     NSError* error;
@@ -370,5 +428,36 @@ static int followedAccounts; /** This is used to count number of accounts follow
     [[self.navigationController view] addSubview:_mainWaitView];
     _mainWaitView.frame = CGRectMake(0, 0, _mainWaitView.frame.size.width, _mainWaitView.frame.size.height);
 }
+
+
+#pragma mark database methods
+/**
+ This method is used to fetch a User with the given name from the User Entity**/
+- (void)setupFetchedResultsController:(NSString*)name
+{
+    // 1 - Decide what Entity you want
+    NSString *entityName = @"User"; // Put your entity name here
+    NSLog(@"Setting up a Fetched Results Controller for the Entity named %@", entityName);
+    
+    // 2 - Request that Entity
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    
+    // 3 - Filter it if you want
+    request.predicate = [NSPredicate predicateWithFormat:@"name = %@",name];
+    
+    // 4 - Sort it if you want
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                                                     ascending:YES
+                                                                                      selector:@selector(localizedCaseInsensitiveCompare:)]];
+    
+    // 5 - Fetch it
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                        managedObjectContext:self.managedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:nil];
+    NSError* error;
+    [self.fetchedResultsController performFetch:&error];
+}
+
 
 @end

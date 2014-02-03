@@ -46,6 +46,15 @@
 		04827529189F74AF00878EC3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04827528189F74AF00878EC3 /* Social.framework */; };
 		0482752C189F7F9000878EC3 /* frame-img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482752A189F7F9000878EC3 /* frame-img@2x.png */; };
 		0482752D189F7F9000878EC3 /* frame-img.png in Resources */ = {isa = PBXBuildFile; fileRef = 0482752B189F7F9000878EC3 /* frame-img.png */; };
+		0482752F189FA2C300878EC3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482752E189FA2C300878EC3 /* CoreData.framework */; };
+		04827533189FA3CF00878EC3 /* MyActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827532189FA3CF00878EC3 /* MyActionsViewController.m */; };
+		04827539189FA3F200878EC3 /* CoreDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827536189FA3F200878EC3 /* CoreDataTableViewCell.m */; };
+		0482753A189FA3F200878EC3 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827538189FA3F200878EC3 /* CoreDataTableViewController.m */; };
+		0482753D189FA4F500878EC3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0482753B189FA4F500878EC3 /* Model.xcdatamodeld */; };
+		0482754C189FB4BB00878EC3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482754B189FB4BB00878EC3 /* User.m */; };
+		0482754F189FB4BB00878EC3 /* Followed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482754E189FB4BB00878EC3 /* Followed.m */; };
+		04827552189FB4BC00878EC3 /* Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827551189FB4BC00878EC3 /* Actions.m */; };
+		04827555189FB52B00878EC3 /* UnFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04827554189FB52B00878EC3 /* UnFollowViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +123,22 @@
 		04827528189F74AF00878EC3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0482752A189F7F9000878EC3 /* frame-img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame-img@2x.png"; sourceTree = "<group>"; };
 		0482752B189F7F9000878EC3 /* frame-img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame-img.png"; sourceTree = "<group>"; };
+		0482752E189FA2C300878EC3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		04827531189FA3CF00878EC3 /* MyActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActionsViewController.h; sourceTree = "<group>"; };
+		04827532189FA3CF00878EC3 /* MyActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActionsViewController.m; sourceTree = "<group>"; };
+		04827535189FA3F200878EC3 /* CoreDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewCell.h; sourceTree = "<group>"; };
+		04827536189FA3F200878EC3 /* CoreDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewCell.m; sourceTree = "<group>"; };
+		04827537189FA3F200878EC3 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		04827538189FA3F200878EC3 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		0482753C189FA4F500878EC3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		0482754A189FB4BB00878EC3 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		0482754B189FB4BB00878EC3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		0482754D189FB4BB00878EC3 /* Followed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Followed.h; sourceTree = "<group>"; };
+		0482754E189FB4BB00878EC3 /* Followed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Followed.m; sourceTree = "<group>"; };
+		04827550189FB4BC00878EC3 /* Actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actions.h; sourceTree = "<group>"; };
+		04827551189FB4BC00878EC3 /* Actions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Actions.m; sourceTree = "<group>"; };
+		04827553189FB52B00878EC3 /* UnFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnFollowViewController.h; sourceTree = "<group>"; };
+		04827554189FB52B00878EC3 /* UnFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnFollowViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0482752F189FA2C300878EC3 /* CoreData.framework in Frameworks */,
 				04827529189F74AF00878EC3 /* Social.framework in Frameworks */,
 				04827527189F748D00878EC3 /* Twitter.framework in Frameworks */,
 				048274FA189F632500878EC3 /* Accounts.framework in Frameworks */,
@@ -167,6 +193,7 @@
 		048274B6189F5B4A00878EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0482752E189FA2C300878EC3 /* CoreData.framework */,
 				04827528189F74AF00878EC3 /* Social.framework */,
 				04827526189F748D00878EC3 /* Twitter.framework */,
 				048274F9189F632500878EC3 /* Accounts.framework */,
@@ -185,8 +212,9 @@
 			children = (
 				048274F0189F62D700878EC3 /* Utils */,
 				048274EC189F628E00878EC3 /* FollowingSection */,
-				048274C6189F5B4A00878EC3 /* AppDelegate.h */,
+				04827530189FA3BD00878EC3 /* StatisticsSection */,
 				048274C7189F5B4A00878EC3 /* AppDelegate.m */,
+				048274C6189F5B4A00878EC3 /* AppDelegate.h */,
 				048274C9189F5B4A00878EC3 /* Main.storyboard */,
 				048274CC189F5B4A00878EC3 /* ViewController.h */,
 				048274CD189F5B4A00878EC3 /* ViewController.m */,
@@ -240,6 +268,8 @@
 				048274EE189F629E00878EC3 /* ChooseAccountViewController.m */,
 				0482751B189F6E1A00878EC3 /* FollowOthersViewController.h */,
 				0482751C189F6E1A00878EC3 /* FollowOthersViewController.m */,
+				04827553189FB52B00878EC3 /* UnFollowViewController.h */,
+				04827554189FB52B00878EC3 /* UnFollowViewController.m */,
 			);
 			name = FollowingSection;
 			sourceTree = "<group>";
@@ -247,6 +277,7 @@
 		048274F0189F62D700878EC3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				04827534189FA3E400878EC3 /* CoreData */,
 				04827520189F715700878EC3 /* Async Loading Images */,
 				0482750B189F6D3B00878EC3 /* Reverse OAuth */,
 				048274F4189F62F800878EC3 /* Loading VIew */,
@@ -292,6 +323,33 @@
 				04827522189F717D00878EC3 /* AsyncImageView.h */,
 			);
 			name = "Async Loading Images";
+			sourceTree = "<group>";
+		};
+		04827530189FA3BD00878EC3 /* StatisticsSection */ = {
+			isa = PBXGroup;
+			children = (
+				04827531189FA3CF00878EC3 /* MyActionsViewController.h */,
+				04827532189FA3CF00878EC3 /* MyActionsViewController.m */,
+			);
+			name = StatisticsSection;
+			sourceTree = "<group>";
+		};
+		04827534189FA3E400878EC3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				04827535189FA3F200878EC3 /* CoreDataTableViewCell.h */,
+				04827536189FA3F200878EC3 /* CoreDataTableViewCell.m */,
+				04827537189FA3F200878EC3 /* CoreDataTableViewController.h */,
+				04827538189FA3F200878EC3 /* CoreDataTableViewController.m */,
+				0482753B189FA4F500878EC3 /* Model.xcdatamodeld */,
+				04827550189FB4BC00878EC3 /* Actions.h */,
+				04827551189FB4BC00878EC3 /* Actions.m */,
+				0482754D189FB4BB00878EC3 /* Followed.h */,
+				0482754E189FB4BB00878EC3 /* Followed.m */,
+				0482754A189FB4BB00878EC3 /* User.h */,
+				0482754B189FB4BB00878EC3 /* User.m */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,14 +459,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				0482751A189F6D6E00878EC3 /* OAuthCore.m in Sources */,
+				0482754F189FB4BB00878EC3 /* Followed.m in Sources */,
 				04827519189F6D6E00878EC3 /* OAuth+Additions.m in Sources */,
 				04827506189F64F600878EC3 /* ETActivityIndicatorView.m in Sources */,
 				048274CE189F5B4A00878EC3 /* ViewController.m in Sources */,
 				04827510189F6D5700878EC3 /* TWSignedRequest.m in Sources */,
+				0482753D189FA4F500878EC3 /* Model.xcdatamodeld in Sources */,
+				0482753A189FA3F200878EC3 /* CoreDataTableViewController.m in Sources */,
+				0482754C189FB4BB00878EC3 /* User.m in Sources */,
+				04827552189FB4BC00878EC3 /* Actions.m in Sources */,
 				04827511189F6D5700878EC3 /* TWAPIManager.m in Sources */,
 				048274EF189F629E00878EC3 /* ChooseAccountViewController.m in Sources */,
+				04827555189FB52B00878EC3 /* UnFollowViewController.m in Sources */,
 				048274F3189F62F200878EC3 /* RNBlurModalView.m in Sources */,
+				04827539189FA3F200878EC3 /* CoreDataTableViewCell.m in Sources */,
 				04827505189F64F600878EC3 /* Circle.m in Sources */,
+				04827533189FA3CF00878EC3 /* MyActionsViewController.m in Sources */,
 				04827518189F6D6E00878EC3 /* NSData+Base64.m in Sources */,
 				048274C8189F5B4A00878EC3 /* AppDelegate.m in Sources */,
 				048274C4189F5B4A00878EC3 /* main.m in Sources */,
@@ -632,6 +698,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0482753B189FA4F500878EC3 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0482753C189FA4F500878EC3 /* Model.xcdatamodel */,
+			);
+			currentVersion = 0482753C189FA4F500878EC3 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 048274AC189F5B4A00878EC3 /* Project object */;
 }

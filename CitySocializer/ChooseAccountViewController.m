@@ -5,15 +5,20 @@
 //  Created by OsamaMac on 2/3/14.
 //  Copyright (c) 2014 OsamaMac. All rights reserved.
 //
-
-#import "ChooseAccountViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ChooseAccountViewController.h"
+#import "User.h"
+#import "FollowOthersViewController.h"
+#import "UnFollowViewController.h"
 
 @interface ChooseAccountViewController ()
 
 @end
 
 @implementation ChooseAccountViewController
+
+@synthesize fetchedResultsController = __fetchedResultsController;
+@synthesize managedObjectContext = __managedObjectContext;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -162,6 +167,18 @@
     [[NSUserDefaults standardUserDefaults]synchronize];
     UIActionSheet* actionSheet = [[UIActionSheet alloc]initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Follow New Users",@"Unfollow Followed Users", nil];
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self setupFetchedResultsController:[[accounts objectAtIndex:selected] username]];
+        if ([[self.fetchedResultsController fetchedObjects] count] <= 0) {
+            User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User"
+                                                       inManagedObjectContext:self.managedObjectContext];
+            
+            user.name = [[accounts objectAtIndex:selected] username];
+            
+            [self.managedObjectContext save:nil];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^(void) {});
+    });
 }
 
 
@@ -195,4 +212,49 @@
         [_mainWaitView removeFromSuperview];
         [_mainWaitView removeFromSuperview];
 }
+
+#pragma mark database methods
+/**
+ This method is used to fetch a User with the given name**/
+- (void)setupFetchedResultsController:(NSString*)name
+{
+    // 1 - Decide what Entity you want
+    NSString *entityName = @"User"; // Put your entity name here
+    NSLog(@"Setting up a Fetched Results Controller for the Entity named %@", entityName);
+    
+    // 2 - Request that Entity
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    
+    // 3 - Filter it if you want
+    request.predicate = [NSPredicate predicateWithFormat:@"name = %@",name];
+    
+    // 4 - Sort it if you want
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                                                     ascending:YES
+                                                                                      selector:@selector(localizedCaseInsensitiveCompare:)]];
+    
+    // 5 - Fetch it
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                        managedObjectContext:self.managedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:nil];
+    NSError* error;
+    [self.fetchedResultsController performFetch:&error];
+}
+
+#pragma mark segue delegate
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier]isEqualToString:@"followSeg"])
+    {
+        FollowOthersViewController* dst = (FollowOthersViewController*)[segue destinationViewController];
+        [dst setManagedObjectContext:self.managedObjectContext];
+    }
+    if([[segue identifier]isEqualToString:@"unfollowSeg"])
+    {
+        UnFollowViewController* dst = (UnFollowViewController*)[segue destinationViewController];
+        [dst setManagedObjectContext:self.managedObjectContext];
+    }
+}
+
 @end

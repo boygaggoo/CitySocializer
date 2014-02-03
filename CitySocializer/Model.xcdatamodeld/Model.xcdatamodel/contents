@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Actions" representedClassName="Actions" syncable="YES">
+        <attribute name="actionDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="actionDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="doneBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="done" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Followed" representedClassName="Followed" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pic" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="followedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="followed" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="done" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Actions" inverseName="doneBy" inverseEntity="Actions" syncable="YES"/>
+        <relationship name="followed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Followed" inverseName="followedBy" inverseEntity="Followed" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Actions" positionX="160" positionY="192" width="128" height="88"/>
+        <element name="User" positionX="403" positionY="162" width="128" height="88"/>
+        <element name="Followed" positionX="178" positionY="314" width="128" height="88"/>
+    </elements>
+</model>
